@@ -49,37 +49,37 @@ The system must support **two backends** (Laravel PHP & Java Spring Boot) with i
 #### Solution:  Centralized API Client Pattern
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    Environment Layer                         │
-│  . env.local: NEXT_PUBLIC_API_BASE_URL=http://localhost:8000 │
+┌───────────────────────────────────────────────────────────────┐
+│                    Environment Layer                          │
+│  . env.local: NEXT_PUBLIC_API_BASE_URL=http://localhost:8000  │
 │  . env.prod:   NEXT_PUBLIC_API_BASE_URL=https://api.java.com  │
-└─────────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────────┘
                               │
                               ▼
-┌─────────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────┐
 │                 API Client (lib/api/client. ts)              │
 │  ┌─────────────────────────────────────────────────────┐   │
-│  │  Axios Instance                                      │   │
+│  │  Axios Instance                                     │   │
 │  │  - baseURL: process.env.NEXT_PUBLIC_API_BASE_URL    │   │
-│  │  - Default headers (Content-Type, Accept)            │   │
+│  │  - Default headers (Content-Type, Accept)           │   │
 │  └─────────────────────────────────────────────────────┘   │
 │  ┌─────────────────────────────────────────────────────┐   │
-│  │  Request Interceptor                                 │   │
-│  │  - Attach Bearer token from auth store               │   │
-│  │  - Add request timing for debugging                  │   │
+│  │  Request Interceptor                                │   │
+│  │  - Attach Bearer token from auth store              │   │
+│  │  - Add request timing for debugging                 │   │
 │  └─────────────────────────────────────────────────────┘   │
 │  ┌─────────────────────────────────────────────────────┐   │
-│  │  Response Interceptor                                │   │
-│  │  - 401: Redirect to /login, clear token              │   │
-│  │  - 403: Show permission denied toast                 │   │
-│  │  - 422: Parse validation errors for forms            │   │
-│  │  - 500: Global error boundary trigger                │   │
+│  │  Response Interceptor                               │   │
+│  │  - 401: Redirect to /login, clear token             │   │
+│  │  - 403: Show permission denied toast                │   │
+│  │  - 422: Parse validation errors for forms           │   │
+│  │  - 500: Global error boundary trigger               │   │
 │  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────┘
                               │
                               ▼
-┌─────────────────────────────────────────────────────────────┐
-│              API Modules (lib/api/modules/*. ts)             │
+┌────────────────────────────────────────────────────────────┐
+│              API Modules (lib/api/modules/*. ts)           │
 │  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐        │
 │  │  authAPI     │ │ donationAPI  │ │  claimAPI    │        │
 │  │  - register  │ │ - list       │ │ - list       │        │
@@ -246,17 +246,6 @@ src/
 └── middleware. ts                 # Route protection (→ proxy. ts in Next.js 16)
 ```
 
-### 1.4 Discrepancies:  `api.js` vs `API-CONTRACT.md`
-
-| # | Issue | `api.js` Status | Contract Requirement | Resolution |
-|---|-------|-----------------|---------------------|------------|
-| 1 | Get single donation | ❌ Missing | `GET /donations/{id}` | Add `get(id)` method |
-| 2 | Update profile | ❌ Missing | `PUT /profile` | Add `profileAPI.update()` |
-| 3 | Notifications list | ❌ Missing | `GET /notifications` | Add `notificationAPI.list()` |
-| 4 | Mark notification read | ❌ Missing | `POST /notifications/{id}/read` | Add `notificationAPI.markRead(id)` |
-| 5 | Error interceptors | ❌ Missing | Standard error format | Add response interceptor |
-| 6 | TypeScript types | ❌ Missing | Defined interfaces | Create matching types |
-| 7 | Validation schemas | ❌ Missing | Field rules in contract | Create Zod schemas |
 
 ---
 
