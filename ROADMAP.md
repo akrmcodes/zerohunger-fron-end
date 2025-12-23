@@ -417,10 +417,10 @@ src/
 #### Task Checklist
 
 **3.1 Type Definitions**
-- [ ] Create `types/donation.ts` matching contract's Donation interface
-- [ ] Create donation status enum/constants
-- [ ] Build Zod schema for donation creation (matching API field rules)
-- [ ] Define `DonationWithClaim` type for my-donations response
+- [✅] Create `types/donation.ts` matching contract's Donation interface
+- [✅] Create donation status enum/constants
+- [✅] Build Zod schema for donation creation (matching API field rules)
+- [✅] Define `DonationWithClaim` type for my-donations response
 
 **3.2 API Module Enhancement**
 - [ ] Add `donationAPI.get(id)` method (missing from api.js)
