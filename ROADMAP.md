@@ -359,10 +359,10 @@ src/
 - [✅] Create breadcrumb navigation component
 
 **2.2 Role Detection & Routing**
-- [ ] Create `app/(dashboard)/page.tsx` that redirects based on role
-- [ ] Implement role-based sidebar menu filtering
-- [ ] Create role constants in `lib/constants/roles. ts`
-- [ ] Build `useUserRole` hook for role checking
+- [✅] Create `app/(dashboard)/page.tsx` that redirects based on role
+- [✅] Implement role-based sidebar menu filtering
+- [✅] Create role constants in `lib/constants/roles. ts`
+- [✅] Build `useUserRole` hook for role checking
 
 **2.3 Donor Dashboard**
 - [ ] Create `app/(dashboard)/donor/page.tsx`
