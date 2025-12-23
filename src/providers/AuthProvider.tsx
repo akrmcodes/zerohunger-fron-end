@@ -11,6 +11,7 @@ import {
 
 import { api } from "@/lib/api";
 import { AUTH_TOKEN_KEY } from "@/lib/constants";
+import { getToken, removeToken, setToken } from "@/lib/utils/auth-storage";
 import type { LoginRequest, RegisterRequest } from "@/lib/api/modules/auth";
 import type { AuthContextType, AuthState } from "@/types/auth";
 
@@ -33,7 +34,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
             };
         }
 
-        const token = window.localStorage.getItem(AUTH_TOKEN_KEY);
+        const token = getToken();
 
         if (!token) {
             setState({ user: null, isAuthenticated: false, isLoading: false });
@@ -49,7 +50,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
                 setState({ user: response.data.user, isAuthenticated: true, isLoading: false });
             } catch (error) {
                 if (!isActive) return;
-                window.localStorage.removeItem(AUTH_TOKEN_KEY);
+                removeToken();
                 setState({ user: null, isAuthenticated: false, isLoading: false });
                 console.error("Auth verification failed", error);
             }
@@ -63,13 +64,11 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }, []);
 
     const login = useCallback(
-        async (payload: LoginRequest): Promise<void> => {
+        async (payload: LoginRequest, remember = true): Promise<void> => {
             setState((prev) => ({ ...prev, isLoading: true }));
             try {
                 const response = await api.auth.login(payload);
-                if (typeof window !== "undefined") {
-                    window.localStorage.setItem(AUTH_TOKEN_KEY, response.data.token);
-                }
+                setToken(response.data.token, remember);
                 setState({
                     user: response.data.user,
                     isAuthenticated: true,
@@ -88,9 +87,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
             setState((prev) => ({ ...prev, isLoading: true }));
             try {
                 const response = await api.auth.register(payload);
-                if (typeof window !== "undefined") {
-                    window.localStorage.setItem(AUTH_TOKEN_KEY, response.data.token);
-                }
+                setToken(response.data.token, true);
                 setState({
                     user: response.data.user,
                     isAuthenticated: true,
@@ -111,9 +108,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         } catch (error) {
             console.error("Logout failed", error);
         } finally {
-            if (typeof window !== "undefined") {
-                window.localStorage.removeItem(AUTH_TOKEN_KEY);
-            }
+            removeToken();
             setState({ user: null, isAuthenticated: false, isLoading: false });
             router.push("/login");
         }

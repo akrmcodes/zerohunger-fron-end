@@ -5,7 +5,7 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 import { ApiError } from "@/types/api";
-import { AUTH_TOKEN_KEY } from "@/lib/constants";
+import { removeToken, getToken } from "@/lib/utils/auth-storage";
 
 const getBaseUrl = (): string => {
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -28,11 +28,9 @@ const client: AxiosInstance = axios.create({
 
 client.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    if (typeof window !== "undefined") {
-      const token = window.localStorage.getItem(AUTH_TOKEN_KEY);
-      if (token) {
-        config.headers?.set("Authorization", `Bearer ${token}`);
-      }
+    const token = getToken();
+    if (token) {
+      config.headers?.set("Authorization", `Bearer ${token}`);
     }
 
     config.headers?.set("Content-Type", "application/json");
@@ -50,7 +48,7 @@ client.interceptors.response.use(
 
     // 401 Unauthorized - Clear token and redirect to login
     if (status === 401 && typeof window !== "undefined") {
-      window.localStorage.removeItem(AUTH_TOKEN_KEY);
+      removeToken();
       window.location.href = "/login";
       return Promise.reject(error);
     }

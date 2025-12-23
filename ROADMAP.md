@@ -282,27 +282,27 @@ src/
 - [✅] Configure `next.config.ts` for image domains and environment variables
 
 **1.2 API Client Architecture**
-- [ ] Create `lib/api/client.ts` with Axios instance
-- [ ] Implement base URL resolution from environment variable
-- [ ] Add request interceptor for Bearer token injection
-- [ ] Add response interceptor for error handling (401, 403, 422, 500)
-- [ ] Create typed API response wrapper `ApiResponse<T>`
-- [ ] Implement `lib/api/modules/auth.ts` with all auth methods
-- [ ] Add missing `profileAPI. update()` method
-- [ ] Export unified API from `lib/api/index. ts`
+- [✅] Create `lib/api/client.ts` with Axios instance
+- [✅] Implement base URL resolution from environment variable
+- [✅] Add request interceptor for Bearer token injection
+- [✅] Add response interceptor for error handling (401, 403, 422, 500)
+- [✅] Create typed API response wrapper `ApiResponse<T>`
+- [✅] Implement `lib/api/modules/auth.ts` with all auth methods
+- [✅] Add missing `profileAPI. update()` method
+- [✅] Export unified API from `lib/api/index. ts`
 
 **1.3 Type Definitions**
-- [ ] Create `types/user.ts` matching contract's User interface
-- [ ] Create `types/api.ts` for response wrappers and error types
-- [ ] Create Zod schemas for registration validation (matching field rules)
-- [ ] Create Zod schemas for login validation
+- [✅] Create `types/user.ts` matching contract's User interface
+- [✅] Create `types/api.ts` for response wrappers and error types
+- [✅] Create Zod schemas for registration validation (matching field rules)
+- [✅] Create Zod schemas for login validation
 
 **1.4 Auth Provider & State Management**
-- [ ] Create `providers/AuthProvider.tsx` with React Context
-- [ ] Implement `useAuth` hook with login, logout, register, user state
-- [ ] Handle token persistence in localStorage with SSR safety
-- [ ] Create auth state types:  `loading`, `authenticated`, `unauthenticated`
-- [ ] Implement auto-logout on 401 responses
+- [✅] Create `providers/AuthProvider.tsx` with React Context
+- [✅] Implement `useAuth` hook with login, logout, register, user state
+- [✅] Handle token persistence in localStorage with SSR safety
+- [✅] Create auth state types:  `loading`, `authenticated`, `unauthenticated`
+- [✅] Implement auto-logout on 401 responses
 
 **1.5 Authentication Pages**
 - [ ] Create `app/(auth)/layout.tsx` - auth pages layout (centered, branded)

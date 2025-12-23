@@ -4,6 +4,7 @@ import { ROLES } from "@/lib/constants";
 export const loginSchema = z.object({
   email: z.string().min(1, { message: "Email is required" }).email("Enter a valid email"),
   password: z.string().min(1, { message: "Password is required" }),
+  remember: z.boolean().default(false).optional(),
 });
 
 export const registerSchema = z
@@ -41,7 +42,7 @@ export const deliverySchema = z.object({
   notes: z.string().max(500, { message: "Notes too long" }).optional(),
 });
 
-export type LoginSchema = z.infer<typeof loginSchema>;
+export type LoginSchemaType = z.infer<typeof loginSchema>;
 export type RegisterSchema = z.infer<typeof registerSchema>;
 export type DonationSchema = z.infer<typeof donationSchema>;
 export type PickupCodeSchema = z.infer<typeof pickupCodeSchema>;
