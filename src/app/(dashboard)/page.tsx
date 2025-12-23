@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import DonorDashboard from "@/components/dashboard/donor/DonorDashboard";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserRole } from "@/hooks/useUserRole";
 
@@ -30,21 +31,7 @@ export default function DashboardPage() {
                 {role && <span className={`rounded-full px-3 py-1 text-xs font-semibold ${badgeClass}`}>{role}</span>}
             </div>
 
-            {isDonor && (
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Ready to give?</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex flex-col gap-3">
-                        <p className="text-slate-700">You have active donations waiting to be shared.</p>
-                        <div>
-                            <Button asChild className="bg-emerald-600 hover:bg-emerald-700">
-                                <Link href="/donations/create">Create Donation</Link>
-                            </Button>
-                        </div>
-                    </CardContent>
-                </Card>
-            )}
+            {isDonor && <DonorDashboard />}
 
             {isVolunteer && (
                 <Card>

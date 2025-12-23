@@ -365,13 +365,13 @@ src/
 - [✅] Build `useUserRole` hook for role checking
 
 **2.3 Donor Dashboard**
-- [ ] Create `app/(dashboard)/donor/page.tsx`
-- [ ] Display total donations count
-- [ ] Show active donations with status
-- [ ] Display impact score with visual badge
-- [ ] Add "Create Donation" quick action card
-- [ ] Show recent donation activity
-- [ ] Implement donation status breakdown (pie chart or stats)
+- [✅] Create `app/(dashboard)/donor/page.tsx`
+- [✅] Display total donations count
+- [✅] Show active donations with status
+- [✅] Display impact score with visual badge
+- [✅] Add "Create Donation" quick action card
+- [✅] Show recent donation activity
+- [✅] Implement donation status breakdown (pie chart or stats)
 
 **2.4 Volunteer Dashboard**
 - [ ] Create `app/(dashboard)/volunteer/page.tsx`
