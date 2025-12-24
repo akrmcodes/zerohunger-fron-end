@@ -490,7 +490,7 @@ src/
 - [✅] Show all donations with claim details
 - [✅] Display volunteer contact info for claimed donations
 - [✅] Add status filters specific to donor view
-- [✅] Implement bulk actions (future enhancement)
+- [⏸️] Implement bulk actions (future enhancement)
 
 ---
 
