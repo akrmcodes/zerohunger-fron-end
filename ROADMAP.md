@@ -533,13 +533,13 @@ src/
 
 **4.3 Claims Management Page**
 
-- [ ] Create `app/claims/page.tsx`
-- [ ] Build `ClaimCard.tsx` component
-- [ ] Display claim status with visual indicator
-- [ ] Show donation details within claim
-- [ ] Add donor information (name, phone)
-- [ ] Display pickup location with link to map
-- [ ] Filter by status (active, picked_up, delivered)
+- [✅] Create `app/claims/page.tsx`
+- [✅] Build `ClaimCard.tsx` component
+- [✅] Display claim status with visual indicator
+- [✅] Show donation details within claim
+- [✅] Add donor information (name, phone)
+- [✅] Display pickup location with link to map
+- [✅] Filter by status (active, picked_up, delivered)
 
 **4.4 Pickup Verification**
 
