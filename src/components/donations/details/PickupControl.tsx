@@ -38,15 +38,21 @@ export function PickupControl({ donation }: PickupControlProps) {
     }, [expiresAt]);
 
     const pickupCode = useMemo(() => {
-        // PRIORITY 1: If there is an active claim, use claim pickup code or claim id
-        if (donation.claim) {
-            const code = (donation.claim as { pickup_code?: string | number }).pickup_code ?? donation.claim.id;
-            return String(code).slice(-6).padStart(6, "0");
-        }
+        const claimPickupCode =
+            donation.claim && "pickup_code" in donation.claim
+                ? (donation.claim as { pickup_code?: string | number }).pickup_code
+                : undefined;
 
-        // PRIORITY 2: Fallback to Donation ID (unclaimed yet)
-        return String(donation.id).padStart(6, "0");
-    }, [donation]);
+        const codeCandidate = [
+            claimPickupCode,
+            donation.pickup_code,
+            donation.claim?.id,
+            donation.id,
+        ].find((value) => value !== null && value !== undefined);
+
+        const normalizedCode = String(codeCandidate ?? donation.id);
+        return normalizedCode.slice(-6).padStart(6, "0");
+    }, [donation.claim, donation.pickup_code, donation.id]);
 
     const handleNavigate = () => {
         const lat = donation.latitude;

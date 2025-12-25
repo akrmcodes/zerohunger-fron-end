@@ -25,7 +25,17 @@ const stepMeta: Record<DonationStatus, { label: string; Icon: React.ComponentTyp
 };
 
 export function DonationTimeline({ donation }: DonationTimelineProps) {
-    const currentIndex = Math.max(stepOrder.indexOf(donation.status as DonationStatus), 0);
+    const statusIndexLookup: Record<string, number> = {
+        pending: 0,
+        available: 0,
+        claimed: 1,
+        active: 1,
+        picked_up: 2,
+        delivered: 3,
+    };
+
+    const normalizedStatus = String(donation.status).toLowerCase();
+    const currentIndex = statusIndexLookup[normalizedStatus] ?? 0;
 
     const timestamps: Partial<Record<DonationStatus, string | null>> = {
         [DonationStatus.Pending]: donation.created_at,
