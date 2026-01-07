@@ -870,11 +870,11 @@ src/
 
 - [❌] Verify all environment variables are set
 - [❌] Test production build locally
-- [❌] Verify API connectivity to both backends
-- [❌] Test all user flows in staging
-- [❌] Confirm CORS is configured correctly
-- [❌] Verify mobile responsiveness
-- [❌] Final accessibility audit
+- [] Verify API connectivity to both backends
+- [] Test all user flows in staging
+- [] Confirm CORS is configured correctly
+- [] Verify mobile responsiveness
+- [] Final accessibility audit
 
 ---
 
